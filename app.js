@@ -1,18 +1,19 @@
 // import functions and grab DOM elements
-const shedClick = document.getElementById('shed-button');
-const boulderButton = document.getElementById('boulder');
+const shedButton = document.getElementById('shed-button');
+const boulderButton = document.getElementById('boulder-button');
+const treeButton = document.getElementById('tree-button');
 
-const shedContainer = document.getElementById('Shed-Container');
+const shedContainer = document.getElementById('shed-Container');
 const treeContainer = document.getElementById('tree-container');
-const boulderContainer = document.getElementById('bouldercontainer');
+const boulderContainer = document.getElementById('boulder-container');
 
 const totalEl = document.getElementById('total');
 const winsEl = document.getElementById('wins');
 
 // initialize state
 const hidingPlaces = [
-    'tree'
-    'shed'
+    'tree',
+    'shed',
     'boulder'
 ];
 
@@ -25,9 +26,6 @@ function getRandomItem(arr) {
     return arr[index];
 }
 
-function handleGuess(userGuess, correctSpot) {
-    resetStyles();
-    totalGuesses++;
 
     const correctHidingPlaceEl = document.getElementById(`${correctSpot}-container`);
 
@@ -40,9 +38,10 @@ function handleGuess(userGuess, correctSpot) {
     totalGuesses = totalEl.textContent;
     correctGuesses = winsEl.textContent;
 
-}
-
-function setStyles() {
+function resetStyles() {
+    function handleGuess(userGuess, correctSpot) {
+        resetStyles();
+        totalGuesses++;
     shedContainer.classList.add('face');
     treeContainer.classList.add('face');
     boulderContainer.classList.add('face');
@@ -60,7 +59,7 @@ treeButton.addEventListener('submit', () => {
     handleGuess(correctSpot, 'tree');  
 });
 
-boulderButton.addEventListener(() => {
+boulderButton.addEventListener('click', () => {
     const correctSpot = getRandomItem(hidingPlaces);
 
     handleGuess(correctSpot, 'boulder');  
